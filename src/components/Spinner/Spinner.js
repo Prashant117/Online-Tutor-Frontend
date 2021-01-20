@@ -1,16 +1,11 @@
 import React from 'react';
-import FadeLoader from 'react-spinners/FadeLoader';
-import { css } from '@emotion/react';
+import spinner from '../../images/spinner.gif';
+import './Spinner.css';
 
 function Spinner() {
-  const override = css`
-    display: block;
-    margin: 0 auto;
-    border-color: red;
-  `;
   return (
     <div className="sweet-loading">
-      <FadeLoader color={'#fff'} css={override} size={80} />
+      <img src={spinner} alt="spinner" />
     </div>
   );
 }

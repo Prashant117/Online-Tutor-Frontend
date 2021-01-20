@@ -5,6 +5,7 @@ import Registration from '../pages/Registration/Registration';
 import Login from '../pages/Login/Login';
 import NotFound from '../pages/404/404';
 import TutorUpdateProfile from '../pages/TutorUpdateProfile/TutorUpdateProfile';
+import TutorViewProfile from '../pages/TutorViewProfile/TutorViewProfile';
 import StudentUpdateProfile from '../pages/StudentUpdateProfile/StudentUpdateProfile';
 import Dashboard from '../pages/Dashboard/Dashboard';
 import Navbar from '../components/Navbar/Navbar';
@@ -40,6 +41,9 @@ const Routes = () => {
           </Route>
           <Route exact path="/update-profile/tutor">
             <TutorUpdateProfile />
+          </Route>
+          <Route exact path="/view-profile/tutor">
+            <TutorViewProfile />
           </Route>
           <Route exact path="/update-profile/student">
             <StudentUpdateProfile />

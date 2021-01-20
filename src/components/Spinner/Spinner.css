@@ -1,0 +1,8 @@
+.sweet-loading {
+    width: 100%;
+    height: 79vh;
+    display: flex;
+    align-items: center !important;
+    justify-content: center;
+    margin: 0 auto;
+}

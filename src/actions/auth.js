@@ -110,7 +110,7 @@ export const studentLogin = ({ email, password }) => async (dispatch) => {
     Cookies.set('Token', res.data.data.token, { expires: 2 });
     Cookies.set('people', 'student');
 
-    window.location.replace('/update-profile/student');
+    window.location.replace('/dashboard');
     // dispatch(loadUser());
   } catch (err) {
     const errors = err?.response?.data;
@@ -143,7 +143,7 @@ export const tutorLogin = ({ email, password }) => async (dispatch) => {
     dispatch(setAlert(res.data.message, 'success'));
     Cookies.set('Token', res.data.data.token, { expires: 2 });
     Cookies.set('people', 'tutor');
-    window.location.replace('/update-profile/tutor');
+    window.location.replace('/dashboard');
     // dispatch(loadUser());
   } catch (err) {
     const errors = err?.response?.data;

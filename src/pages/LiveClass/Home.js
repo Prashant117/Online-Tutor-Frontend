@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Button, IconButton } from '@material-ui/core';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import VideoCallIcon from '@material-ui/icons/VideoCall';
 import './Home.css';
 
 class Home extends Component {
@@ -27,9 +26,9 @@ class Home extends Component {
     return (
       <div className="container2">
         <div>
-          <h1 style={{ fontSize: '45px' }}>Live Class</h1>
-          <p style={{ fontWeight: '200' }}>
-            Start live class and share with your students
+          <h3 style={{ fontSize: '30px' }}>Start or join class</h3>
+          <p style={{ fontWeight: '600' }}>
+            share with your students or teacher
           </p>
         </div>
 
@@ -45,18 +44,14 @@ class Home extends Component {
             marginTop: '100px',
           }}
         >
-          <p style={{ margin: 0, fontWeight: 'bold', paddingRight: '50px' }}>
-            Start or join a meeting
-          </p>
-          <Input placeholder="URL" onChange={(e) => this.handleChange(e)} />
-          <Button
-            variant="contained"
-            color="primary"
+          <button
+            className="btn btn--radius-2 btn--red"
             onClick={this.join}
             style={{ margin: '20px' }}
           >
-            Go
-          </Button>
+            <VideoCallIcon style={{ marginRight: '10px' }} />
+            Start
+          </button>
         </div>
       </div>
     );

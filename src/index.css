@@ -17,11 +17,11 @@ color 4 : #45A29E
 }
 
 :root {
-  --primary-color: #17a2b8;
-  --dark-color: #343a40;
-  --light-color: #f4f4f4;
-  --danger-color: #dc3545;
-  --success-color: #28a745;
+  --primary-color: #17a2b8 !important;
+  --dark-color: #343a40 !important;
+  --light-color: #f4f4f4 !important;
+  --danger-color: #dc3545 !important;
+  --success-color: #28a745 !important;
 }
 
 .font-robo {
@@ -156,9 +156,9 @@ button {
 }
 
 body {
-  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
-  font-weight: 400;
-  font-size: 14px;
+  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
 }
 
 h1,
@@ -256,17 +256,17 @@ h6 {
      #BUTTON
      ========================================================================== */
 .btn {
-  display: inline-block;
-  line-height: 50px;
-  padding: 0 50px;
-  -webkit-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
-  -moz-transition: all 0.4s ease;
-  transition: all 0.4s ease;
-  cursor: pointer;
-  font-size: 18px;
-  color: #fff;
-  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+  display: inline-block !important;
+  line-height: 50px !important;
+  padding: 0 50px !important;
+  -webkit-transition: all 0.4s ease !important;
+  -o-transition: all 0.4s ease !important;
+  -moz-transition: all 0.4s ease !important;
+  transition: all 0.4s ease !important;
+  cursor: pointer !important;
+  font-size: 18px !important;
+  color: #fff !important;
+  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif !important;
 }
 
 .btn--radius {
@@ -304,10 +304,10 @@ h6 {
 }
 
 .btn--red {
-  background: #e63946;
+  background: #e63946 !important;
 }
 .btn--red:hover {
-  background: #e76f51;
+  background: #e76f51 !important;
 }
 
 /* ==========================================================================

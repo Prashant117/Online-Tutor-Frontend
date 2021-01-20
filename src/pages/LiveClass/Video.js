@@ -588,24 +588,13 @@ class Video extends Component {
                 justifyContent: 'center',
               }}
             >
-              <p
-                style={{ margin: 0, fontWeight: 'bold', paddingRight: '50px' }}
-              >
-                Set your username
-              </p>
-              <Input
-                placeholder="Username"
-                value={this.state.username}
-                onChange={(e) => this.handleUsername(e)}
-              />
-              <Button
-                variant="contained"
-                color="primary"
+              <button
+                className="btn btn--radius-2 btn--red"
                 onClick={this.connect}
                 style={{ margin: '20px' }}
               >
                 Connect
-              </Button>
+              </button>
             </div>
 
             <div
@@ -727,32 +716,24 @@ class Video extends Component {
                   value={this.state.message}
                   onChange={(e) => this.handleMessage(e)}
                 />
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.sendMessage}
-                >
+                <button className="copy-link" onClick={this.sendMessage}>
                   Send
-                </Button>
+                </button>
               </Modal.Footer>
             </Modal>
 
             <div className="container">
-              <div style={{ paddingTop: '20px' }}>
-                <Input value={window.location.href} disable="true"></Input>
-                <Button
-                  style={{
-                    backgroundColor: '#3f51b5',
-                    color: 'whitesmoke',
-                    marginLeft: '20px',
-                    marginTop: '10px',
-                    width: '120px',
-                    fontSize: '10px',
-                  }}
-                  onClick={this.copyUrl}
-                >
+              <div
+                style={{
+                  paddingTop: '20px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <button className="copy-link" onClick={this.copyUrl}>
                   Copy invite link
-                </Button>
+                </button>
               </div>
 
               <Row

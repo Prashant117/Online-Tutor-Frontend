@@ -33,3 +33,19 @@
     width: 100%;
     height: auto;
 }
+.url-input {
+    width: 30%;
+    background: #dc3545;
+    padding: 5px 10px;
+    color: white;
+    text-align: center;
+    border-radius: 4px;
+}
+
+.copy-link {
+    margin-left: 20px;
+    background: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+}

@@ -14,26 +14,26 @@
   color: #333;
 }
 .alert-primary {
-  background: var(--primary-color);
-  color: #fff;
+  background: var(--primary-color) !important;
+  color: #fff !important;
 }
 .alert-light {
-  background: var(--light-color);
-  color: #333;
+  background: var(--light-color) !important;
+  color: #333 !important;
 }
 .alert-dark {
-  background: var(--dark-color);
-  color: #fff;
+  background: var(--dark-color) !important;
+  color: #fff !important;
 }
 
 .alert-danger {
-  background: var(--danger-color);
-  color: #fff;
+  background: var(--danger-color) !important;
+  color: #fff !important;
 }
 
 .alert-success {
-  background: var(--success-color);
-  color: #fff;
+  background: var(--success-color) !important;
+  color: #fff !important;
 }
 
 .alert-white {

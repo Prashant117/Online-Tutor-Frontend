@@ -1,5 +1,6 @@
 import React from 'react';
 import './Dashboard.css';
+import { Link } from 'react-router-dom';
 import TutorPost from '../../components/TutorPost/TutorPost';
 import OnlineStreaming from '../../components/OnlineStreaming/OnlineStreaming';
 import EnrolledStudent from '../../components/EnrolledStudent/EnrolledStudent';
@@ -19,7 +20,9 @@ const Dashboard = () => {
             <TutorPost />
           </div>
           <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
-            <OnlineStreaming />
+            <Link to="/live-class/index">
+              <OnlineStreaming />
+            </Link>
           </div>
           <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
             <Message />

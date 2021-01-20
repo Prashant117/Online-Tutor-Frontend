@@ -1,0 +1,21 @@
+.icon-wrapper {
+    width: 100px;
+    height: 80px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+.icon-wrapper img {
+    height: 100%;
+}
+
+.dashboard-card {
+    background: ghostwhite;
+    box-shadow: 0px 0px 11px 5px lightgrey;
+    padding: 25px 25px;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+}

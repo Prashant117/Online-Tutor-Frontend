@@ -7,8 +7,9 @@ import HSC from './HSC';
 import Graduation from './Graduation';
 import Master from './Master';
 import { useDispatch } from 'react-redux';
-import { tutorUpdateProfile } from '../../actions/profile';
+import { tutorUpdateProfile, tutorViewProfile } from '../../actions/profile';
 import { useSelector } from 'react-redux';
+import profileImage from '../../images/ProfileImage.png';
 import {
   getSSCLevel,
   getHSCLevel,
@@ -19,6 +20,7 @@ import {
   getGraduationDegree,
   getMasterDegree,
 } from '../../actions/education';
+import Spinner from '../../components/Spinner/Spinner';
 
 const TutorUpdateProfile = () => {
   const { register, handleSubmit } = useForm();
@@ -53,7 +55,7 @@ const TutorUpdateProfile = () => {
   const [speciality, setSpeciality] = useState('');
   const [presentAddress, setPresentAddress] = useState('');
   const [permanentAddress, setPermanentAddress] = useState('');
-  const [image, setImage] = useState(null);
+  const [image, setImage] = useState(profileImage);
 
   const dispatch = useDispatch();
   const onSubmit = (data) => {
@@ -63,6 +65,14 @@ const TutorUpdateProfile = () => {
     dispatch(tutorUpdateProfile(data));
     window.scrollTo(0, 0);
   };
+
+  useEffect(() => {
+    if (user?.status === 'tutor') {
+      dispatch(tutorViewProfile(user?._id));
+    }
+  }, [user, dispatch]);
+  const profile = useSelector((state) => state.profile);
+  const { loading } = profile;
 
   useEffect(() => {
     dispatch(getSSCLevel());
@@ -75,125 +85,175 @@ const TutorUpdateProfile = () => {
     dispatch(getMasterDegree());
   }, [dispatch]);
 
+  useEffect(() => {
+    //Image
+    setImage(
+      `http://localhost:5000/public/${profile?.tutorViewProfile?.image}`
+    );
+    //ssc
+    setSscExamination(profile?.tutorViewProfile?.ssc?.examination);
+    setSscGroup(profile?.tutorViewProfile?.ssc?.group);
+    setSscBoard(profile?.tutorViewProfile?.ssc?.board);
+    setSscPassingYear(profile?.tutorViewProfile?.ssc?.passingYear);
+    setSscResult(profile?.tutorViewProfile?.ssc?.result);
+    //hsc
+    setHscExamination(profile?.tutorViewProfile?.hsc?.examination);
+    setHscGroup(profile?.tutorViewProfile?.hsc?.group);
+    setHscBoard(profile?.tutorViewProfile?.hsc?.board);
+    setHscPassingYear(profile?.tutorViewProfile?.hsc?.passingYear);
+    setHscResult(profile?.tutorViewProfile?.hsc?.result);
+    //Degree
+    setGraduationDegree(profile?.tutorViewProfile?.graduation?.degree);
+    setGraduationSubject(profile?.tutorViewProfile?.graduation?.subject);
+    setGraduationBoard(profile?.tutorViewProfile?.graduation?.board);
+    setGraduationPassingYear(
+      profile?.tutorViewProfile?.graduation?.passingYear
+    );
+    setGraduationResult(profile?.tutorViewProfile?.graduation?.result);
+    //Master
+
+    setMasterDegree(profile?.tutorViewProfile?.master?.degree);
+    setMasterSubject(profile?.tutorViewProfile?.master?.subject);
+    setMasterBoard(profile?.tutorViewProfile?.master?.board);
+    setMasterPassingYear(profile?.tutorViewProfile?.master?.passingYear);
+    setMasterResult(profile?.tutorViewProfile?.master?.result);
+    //Info
+    setSpeciality(profile?.tutorViewProfile?.speciality);
+    setPresentAddress(profile?.tutorViewProfile?.presentAddress);
+    setPermanentAddress(profile?.tutorViewProfile?.permanentAddress);
+  }, [profile]);
+
   return (
-    <div className="auth-wrapper">
-      <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
-        <div className="wrapper wrapper--w680">
-          <div className="card card-4">
-            <div className="card-body">
-              <h2 className="title text-center">Update Profile</h2>
-              <form onSubmit={handleSubmit(onSubmit)}>
-                <ProfileImage
-                  register={register}
-                  image={image}
-                  setImage={setImage}
-                />
-                <SSC
-                  register={register}
-                  sscExamination={sscExamination}
-                  setSscExamination={setSscExamination}
-                  sscBoard={sscBoard}
-                  setSscBoard={setSscBoard}
-                  sscGroup={sscGroup}
-                  setSscGroup={setSscGroup}
-                  sscPassingYear={sscPassingYear}
-                  setSscPassingYear={setSscPassingYear}
-                  sscResult={sscResult}
-                  setSscResult={setSscResult}
-                />
-                <HSC
-                  register={register}
-                  hscExamination={hscExamination}
-                  setHscExamination={setHscExamination}
-                  hscBoard={hscBoard}
-                  setHscBoard={setHscBoard}
-                  hscGroup={hscGroup}
-                  setHscGroup={setHscGroup}
-                  hscPassingYear={hscPassingYear}
-                  setHscPassingYear={setHscPassingYear}
-                  hscResult={hscResult}
-                  setHscResult={setHscResult}
-                />
-                <Graduation
-                  register={register}
-                  graduationDegree={graduationDegree}
-                  setGraduationDegree={setGraduationDegree}
-                  graduationSubject={graduationSubject}
-                  setGraduationSubject={setGraduationSubject}
-                  graduationBoard={graduationBoard}
-                  setGraduationBoard={setGraduationBoard}
-                  graduationPassingYear={graduationPassingYear}
-                  setGraduationPassingYear={setGraduationPassingYear}
-                  graduationResult={graduationResult}
-                  setGraduationResult={setGraduationResult}
-                />
-                <Master
-                  register={register}
-                  masterDegree={masterDegree}
-                  setMasterDegree={setMasterDegree}
-                  masterSubject={masterSubject}
-                  setMasterSubject={setMasterSubject}
-                  masterBoard={masterBoard}
-                  setMasterBoard={setMasterBoard}
-                  masterPassingYear={masterPassingYear}
-                  setMasterPassingYear={setMasterPassingYear}
-                  masterResult={masterResult}
-                  setMasterResult={setMasterResult}
-                />
-
-                <div className="row row-space">
-                  <img src={image} alt="" />
-                  <div className="input-group">
-                    <label className="label">Speciality</label>
-                    <input
-                      value={speciality}
-                      ref={register}
-                      onChange={(e) => setSpeciality(e.target.value)}
-                      style={{ height: '50px' }}
-                      className="input--style-4"
-                      type="text"
-                      name="speciality"
+    <>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="auth-wrapper">
+          <div className="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+            <div className="wrapper wrapper--w680">
+              <div className="card card-4">
+                <div className="card-body">
+                  <h2 className="title text-center">Update Profile</h2>
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                    <ProfileImage
+                      register={register}
+                      image={
+                        typeof image === 'object'
+                          ? URL.createObjectURL(image)
+                          : image
+                      }
+                      setImage={setImage}
                     />
-                  </div>
-                </div>
+                    <SSC
+                      register={register}
+                      sscExamination={sscExamination}
+                      setSscExamination={setSscExamination}
+                      sscBoard={sscBoard}
+                      setSscBoard={setSscBoard}
+                      sscGroup={sscGroup}
+                      setSscGroup={setSscGroup}
+                      sscPassingYear={sscPassingYear}
+                      setSscPassingYear={setSscPassingYear}
+                      sscResult={sscResult}
+                      setSscResult={setSscResult}
+                    />
+                    <HSC
+                      register={register}
+                      hscExamination={hscExamination}
+                      setHscExamination={setHscExamination}
+                      hscBoard={hscBoard}
+                      setHscBoard={setHscBoard}
+                      hscGroup={hscGroup}
+                      setHscGroup={setHscGroup}
+                      hscPassingYear={hscPassingYear}
+                      setHscPassingYear={setHscPassingYear}
+                      hscResult={hscResult}
+                      setHscResult={setHscResult}
+                    />
+                    <Graduation
+                      register={register}
+                      graduationDegree={graduationDegree}
+                      setGraduationDegree={setGraduationDegree}
+                      graduationSubject={graduationSubject}
+                      setGraduationSubject={setGraduationSubject}
+                      graduationBoard={graduationBoard}
+                      setGraduationBoard={setGraduationBoard}
+                      graduationPassingYear={graduationPassingYear}
+                      setGraduationPassingYear={setGraduationPassingYear}
+                      graduationResult={graduationResult}
+                      setGraduationResult={setGraduationResult}
+                    />
+                    <Master
+                      register={register}
+                      masterDegree={masterDegree}
+                      setMasterDegree={setMasterDegree}
+                      masterSubject={masterSubject}
+                      setMasterSubject={setMasterSubject}
+                      masterBoard={masterBoard}
+                      setMasterBoard={setMasterBoard}
+                      masterPassingYear={masterPassingYear}
+                      setMasterPassingYear={setMasterPassingYear}
+                      masterResult={masterResult}
+                      setMasterResult={setMasterResult}
+                    />
 
-                <div className="row row-space">
-                  <div className="input-group">
-                    <label className="label">Present Address</label>
-                    <textarea
-                      ref={register}
-                      value={presentAddress}
-                      onChange={(e) => setPresentAddress(e.target.value)}
-                      className="input--style-4 text-area"
-                      name="presentAddress"
-                    ></textarea>
-                  </div>
-                </div>
+                    <div className="row row-space">
+                      <div className="input-group">
+                        <label className="label">Speciality</label>
+                        <input
+                          value={speciality}
+                          ref={register}
+                          onChange={(e) => setSpeciality(e.target.value)}
+                          style={{ height: '50px' }}
+                          className="input--style-4"
+                          type="text"
+                          name="speciality"
+                        />
+                      </div>
+                    </div>
 
-                <div className="row row-space">
-                  <div className="input-group">
-                    <label className="label">Permanent Address</label>
-                    <textarea
-                      ref={register}
-                      value={permanentAddress}
-                      onChange={(e) => setPermanentAddress(e.target.value)}
-                      className="input--style-4 text-area"
-                      name="permanentAddress"
-                    ></textarea>
-                  </div>
-                </div>
+                    <div className="row row-space">
+                      <div className="input-group">
+                        <label className="label">Present Address</label>
+                        <textarea
+                          ref={register}
+                          value={presentAddress}
+                          onChange={(e) => setPresentAddress(e.target.value)}
+                          className="input--style-4 text-area"
+                          name="presentAddress"
+                        ></textarea>
+                      </div>
+                    </div>
 
-                <div className="p-t-15 text-center">
-                  <button className="btn btn--radius-2 btn--red" type="submit">
-                    Save
-                  </button>
+                    <div className="row row-space">
+                      <div className="input-group">
+                        <label className="label">Permanent Address</label>
+                        <textarea
+                          ref={register}
+                          value={permanentAddress}
+                          onChange={(e) => setPermanentAddress(e.target.value)}
+                          className="input--style-4 text-area"
+                          name="permanentAddress"
+                        ></textarea>
+                      </div>
+                    </div>
+
+                    <div className="p-t-15 text-center">
+                      <button
+                        className="btn btn--radius-2 btn--red"
+                        type="submit"
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </form>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

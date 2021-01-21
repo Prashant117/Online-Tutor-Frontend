@@ -1,8 +1,82 @@
+import {
+  TUTOR_VIEW_PROFILE,
+  STUDENT_VIEW_PROFILE,
+  PROFILE_STATUS_CODE,
+} from './types';
 import { setAlert } from './alert';
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
 const BASE_URL = 'http://localhost:5000/api';
+
+//Tutor View Profile
+
+export const tutorViewProfile = (id) => async (dispatch) => {
+  const token = Cookies.get('Token');
+  const config = {
+    headers: {
+      token: token,
+    },
+  };
+  try {
+    const res = await axios.get(`${BASE_URL}/profile/tutor/${id}`, config);
+    console.log(res);
+    if (res.data.statusCode === 200) {
+      dispatch({
+        type: TUTOR_VIEW_PROFILE,
+        payload: res.data.data,
+      });
+      dispatch({
+        type: PROFILE_STATUS_CODE,
+        payload: 200,
+      });
+    } else if (res.data.statusCode === 404) {
+      dispatch({
+        type: PROFILE_STATUS_CODE,
+        payload: 404,
+      });
+    }
+  } catch (error) {
+    const errors = error?.response?.data?.message;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+  }
+};
+//Student View Profile
+
+export const studentViewProfile = (id) => async (dispatch) => {
+  const token = Cookies.get('Token');
+  const config = {
+    headers: {
+      token: token,
+    },
+  };
+  try {
+    const res = await axios.get(`${BASE_URL}/profile/student/${id}`, config);
+    console.log(res);
+    if (res.data.statusCode === 200) {
+      dispatch({
+        type: STUDENT_VIEW_PROFILE,
+        payload: res.data.data,
+      });
+      dispatch({
+        type: PROFILE_STATUS_CODE,
+        payload: 200,
+      });
+    } else if (res.data.statusCode === 404) {
+      dispatch({
+        type: PROFILE_STATUS_CODE,
+        payload: 404,
+      });
+    }
+  } catch (error) {
+    const errors = error?.response?.data?.message;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+  }
+};
 
 //Tutor Update Profile
 
@@ -81,7 +155,7 @@ export const tutorUpdateProfile = ({
     console.log(res.data);
 
     dispatch(setAlert(res.data.message, 'success'));
-    window.location.replace('/');
+    window.location.replace('/view-profile/tutor');
   } catch (err) {
     const errors = err?.response?.data?.message;
     if (errors) {
@@ -127,7 +201,7 @@ export const studentUpdateProfile = ({
     console.log(res.data);
 
     dispatch(setAlert(res.data.message, 'success'));
-    window.location.replace('/');
+    window.location.replace('/view-profile/student');
   } catch (err) {
     const errors = err?.response?.data?.message;
     if (errors) {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Dashboard.css';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -9,9 +9,21 @@ import Message from '../../components/Message/Message';
 import Spinner from '../../components/Spinner/Spinner';
 import Profile from '../../components/Profile/Profile';
 import Task from '../../components/Task/Task';
+import { useDispatch } from 'react-redux';
+import { tutorViewProfile, studentViewProfile } from '../../actions/profile';
 
 const Dashboard = () => {
   const { loading, user } = useSelector((state) => state.auth);
+  const { profileStatusCode } = useSelector((state) => state.profile);
+  console.log(profileStatusCode);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (user?.status === 'student') {
+      dispatch(studentViewProfile(user?._id));
+    } else if (user?.status === 'tutor') {
+      dispatch(tutorViewProfile(user?._id));
+    }
+  }, [user, dispatch]);
   return (
     <div className="dashboard">
       <div className="container">
@@ -45,7 +57,11 @@ const Dashboard = () => {
                 <Link
                   to={
                     user?.status === 'tutor'
-                      ? '/view-profile/tutor'
+                      ? profileStatusCode === 404
+                        ? 'update-profile/tutor'
+                        : '/view-profile/tutor'
+                      : profileStatusCode === 404
+                      ? 'update-profile/student'
                       : '/view-profile/student'
                   }
                 >

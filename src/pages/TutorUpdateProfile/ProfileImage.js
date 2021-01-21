@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import profile from '../../images/ProfileImage.png';
 import EditIcon from '@material-ui/icons/Edit';
 
@@ -8,11 +8,7 @@ const ProfileImage = ({ register, image, setImage }) => {
       <div className="row row-space">
         <div className="update__profile-image-wrapper">
           <div className="profile__image">
-            <img
-              ref={register}
-              src={image === null ? profile : URL.createObjectURL(image)}
-              alt="Profile"
-            />
+            <img ref={register} src={image} alt="Profile" />
 
             <div className="edit-box">
               <label htmlFor="image">

@@ -40,9 +40,11 @@ const ViewProfile = () => {
                   />
                 </div>
                 <div>
-                  <h5>Syket Bhattachergee</h5>
-                  <p>syketb@gamil.com</p>
-                  <p>01865556490</p>
+                  <h5>
+                    {user?.firstName} {user?.lastName}
+                  </h5>
+                  <p>{user?.email}</p>
+                  <p>{user?.phone}</p>
                   <span className="badge badge-info">Tutor</span>
                 </div>
                 <Link to="/update-profile/tutor">

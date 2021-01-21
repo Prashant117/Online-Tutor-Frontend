@@ -13,6 +13,7 @@ import Navbar from '../components/Navbar/Navbar';
 import Alert from '../components/Alert/Alert';
 import LiveClassHome from '../pages/LiveClass/Home';
 import LiveClass from '../pages/LiveClass/Video';
+import TutorPost from '../pages/TutorPost/TutorPost';
 
 const Routes = () => {
   return (
@@ -60,6 +61,9 @@ const Routes = () => {
           </Route>
           <Route exact path="/live-class/:url">
             <LiveClass />
+          </Route>
+          <Route exact path="/tutor-post">
+            <TutorPost />
           </Route>
           <Route path="*">
             <NotFound />

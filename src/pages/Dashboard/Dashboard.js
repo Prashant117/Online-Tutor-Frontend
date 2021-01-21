@@ -31,29 +31,30 @@ const Dashboard = () => {
           <Spinner />
         ) : (
           <>
-            <div className="row my-4">
+            <div className="row justify-content-center my-4">
               {user?.status === 'tutor' && (
                 <>
-                  <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                  <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                     <EnrolledStudent />
                   </div>
-                  <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
-                    <TutorPost />
+                  <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+                    <Link to="/tutor-post">
+                      <TutorPost />
+                    </Link>
                   </div>
                 </>
               )}
 
-              <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+              <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                 <Link to="/live-class/index">
                   <OnlineStreaming />
                 </Link>
               </div>
-              <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+              <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                 <Message />
               </div>
-            </div>
-            <div className="row my-4">
-              <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+
+              <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                 <Link
                   to={
                     user?.status === 'tutor'
@@ -68,7 +69,7 @@ const Dashboard = () => {
                   <Profile />
                 </Link>
               </div>
-              <div className="col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
+              <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                 <Task />
               </div>
             </div>

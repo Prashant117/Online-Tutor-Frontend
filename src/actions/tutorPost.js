@@ -5,12 +5,55 @@ import Cookies from 'js-cookie';
 
 const BASE_URL = 'http://localhost:5000/api';
 
+// TUTOR POST
+export const tutorPost = ({
+  tutorId,
+  tutorName,
+  image,
+  qualification,
+  subjectName,
+  time,
+  payment,
+  days,
+  note,
+}) => async (dispatch) => {
+  const token = Cookies.get('Token');
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+      token: token,
+    },
+  };
+  const body = JSON.stringify({
+    tutorId,
+    tutorName,
+    image,
+    qualification,
+    subjectName,
+    time,
+    payment: parseInt(payment),
+    days: parseInt(days),
+    note,
+  });
+  try {
+    const res = await axios.post(`${BASE_URL}/tutor-post`, body, config);
+    console.log(res);
+    dispatch(setAlert(res?.data?.message, 'success'));
+    window.location.reload();
+  } catch (error) {
+    const errors = error?.response?.data?.message;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+  }
+};
+
 //ALL TUTOR POST
 export const getAllTutorPosts = () => async (dispatch) => {
   try {
     const res = await axios.get(`${BASE_URL}/tutor-post/all`);
     console.log(res);
-    dispatch({
+    const tutor = await dispatch({
       type: ALL_TUTOR_POST,
       payload: res.data,
     });

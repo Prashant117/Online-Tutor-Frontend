@@ -6,6 +6,7 @@ import Spinner from '../../components/Spinner/Spinner';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddTutorPost from '../../components/AddTutorPost/AddTutorPost';
 import './TutorPost.css';
+import { tutorViewProfile } from '../../actions/profile';
 
 const TutorPost = () => {
   const dispatch = useDispatch();
@@ -16,6 +17,7 @@ const TutorPost = () => {
 
   useEffect(() => {
     dispatch(getSpecificTutorPosts(user?._id));
+    dispatch(tutorViewProfile(user?._id));
   }, [dispatch, user]);
   const { specificTutorPosts, loading } = useSelector((state) => state.post);
   return (
@@ -27,7 +29,20 @@ const TutorPost = () => {
         {loading ? (
           <Spinner />
         ) : specificTutorPosts?.length > 0 ? (
-          specificTutorPosts?.map((post) => <PostCard key={post?._id} />)
+          specificTutorPosts?.map((post) => (
+            <PostCard
+              key={post?._id}
+              tutorName={post.tutorName}
+              image={post.image}
+              qualification={post.qualification}
+              subjectName={post.subjectName}
+              time={post.time}
+              days={post.days}
+              payment={post.payment}
+              note={post.note}
+              date={post.date}
+            />
+          ))
         ) : (
           <h4>You don't have any post</h4>
         )}

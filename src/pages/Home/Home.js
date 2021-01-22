@@ -15,7 +15,20 @@ const Home = () => {
         {loading ? (
           <Spinner />
         ) : (
-          allPosts?.map((post) => <PostCard key={post?._id} />)
+          allPosts?.map((post) => (
+            <PostCard
+              key={post?._id}
+              tutorName={post.tutorName}
+              image={post.image}
+              qualification={post.qualification}
+              subjectName={post.subjectName}
+              time={post.time}
+              days={post.days}
+              payment={post.payment}
+              note={post.note}
+              date={post.date}
+            />
+          ))
         )}
       </div>
     </div>

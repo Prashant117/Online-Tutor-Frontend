@@ -1,10 +1,34 @@
 import React from 'react';
 import { Modal } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { tutorPost } from '../../actions/tutorPost';
+
 const AddTutorPost = ({ show, handleClose, handleShow }) => {
   const { handleSubmit, register, errors } = useForm();
+  const { user } = useSelector((state) => state.auth);
+  const { tutorViewProfile } = useSelector((state) => state.profile);
+
+  const dispatch = useDispatch();
+  const qualification =
+    tutorViewProfile?.master?.degree !== ''
+      ? tutorViewProfile?.master?.degree
+      : tutorViewProfile?.graduation?.degree !== ''
+      ? tutorViewProfile?.graduation?.degree
+      : tutorViewProfile?.hsc?.examination !== ''
+      ? tutorViewProfile?.hsc?.examination
+      : tutorViewProfile?.ssc?.examination !== ''
+      ? tutorViewProfile?.ssc?.examination
+      : 'N/A';
   const onSubmit = (data) => {
+    data.tutorId = user?._id;
+    const name = user?.firstName + user?.lastName;
+    data.tutorName = name;
+    data.image = tutorViewProfile.image;
+    data.qualification = qualification;
     console.log(data);
+    dispatch(tutorPost(data));
+    handleClose();
   };
   return (
     <>
@@ -45,7 +69,7 @@ const AddTutorPost = ({ show, handleClose, handleShow }) => {
                     max="7"
                     min="1"
                   />
-                  {errors.password && <p className="days">day is required.</p>}
+                  {errors.days && <p className="error">day is required.</p>}
                 </div>
               </div>
               <div className="col-md-12">
@@ -57,7 +81,7 @@ const AddTutorPost = ({ show, handleClose, handleShow }) => {
                     type="text"
                     name="time"
                   />
-                  {errors.password && <p className="time">Time is required.</p>}
+                  {errors.time && <p className="error">Time is required.</p>}
                 </div>
               </div>
               <div className="col-md-12">
@@ -69,8 +93,8 @@ const AddTutorPost = ({ show, handleClose, handleShow }) => {
                     type="number"
                     name="payment"
                   />
-                  {errors.password && (
-                    <p className="payment">Payment is required.</p>
+                  {errors.payment && (
+                    <p className="error">Payment is required.</p>
                   )}
                 </div>
               </div>
@@ -82,21 +106,20 @@ const AddTutorPost = ({ show, handleClose, handleShow }) => {
                   <textarea
                     className="input--style-4 text-area"
                     ref={register({ required: true })}
-                    name="days"
+                    name="note"
                     maxLength="50"
                   ></textarea>
-                  {errors.password && <p className="days">Note is required.</p>}
+                  {errors.note && <p className="error">Note is required.</p>}
                 </div>
               </div>
             </div>
+            <div className="text-center">
+              <button type="submit" className="btn btn--red">
+                Add post
+              </button>
+            </div>
           </form>
         </Modal.Body>
-
-        <Modal.Footer>
-          <button type="submit" className="btn btn--red">
-            Add post
-          </button>
-        </Modal.Footer>
       </Modal>
     </>
   );

@@ -28,7 +28,7 @@
 }
 .view-profile {
     border-radius: 4px;
-    background: #dc3545;
+    background: #577187;
     color: white;
     padding: 4px 9px;
     font-size: 13px;
@@ -40,4 +40,13 @@
 .profile-name {
     margin-top: 15px;
     margin-bottom: 5px;
+}
+.enroll button {
+    background: #dc3545;
+    padding: 4px 10px;
+    color: white;
+    border-radius: 4px;
+}
+.enroll button:focus {
+    outline: none !important;
 }

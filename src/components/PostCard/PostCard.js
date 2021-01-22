@@ -2,6 +2,7 @@ import React from 'react';
 import profileImage from '../../images/ProfileImage.png';
 import './PostCard.css';
 import Moment from 'react-moment';
+import { useSelector } from 'react-redux';
 const PostCard = ({
   tutorName,
   image,
@@ -13,6 +14,7 @@ const PostCard = ({
   note,
   date,
 }) => {
+  const { user } = useSelector((state) => state.auth);
   return (
     <div className="postCard">
       <div className="postCard__image-wrapper">
@@ -48,6 +50,11 @@ const PostCard = ({
         <p className="font-italic">
           <Moment fromNow>{date}</Moment>
         </p>
+        {user?.status === 'student' && (
+          <div className="enroll">
+            <button>Enroll now</button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -16,7 +16,7 @@ const PostCard = ({
   note,
   date,
 }) => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
   return (
     <div className="postCard">
       <div className="postCard__image-wrapper">
@@ -29,10 +29,14 @@ const PostCard = ({
         <p className="profile-name bold">{tutorName}</p>
         {user?._id === tutorId ? (
           <button className="view-profile-me">posted by you</button>
-        ) : (
+        ) : isAuthenticated ? (
           <Link to={`tutor-profile/${tutorId}`}>
             <button className="view-profile">view profile</button>
           </Link>
+        ) : (
+          <button style={{ cursor: 'not-allowed' }} className="view-profile">
+            view profile
+          </button>
         )}
         <p className="margin-bottom-0 d-flex justify-content-between">
           <span className="bold">Subject:</span>

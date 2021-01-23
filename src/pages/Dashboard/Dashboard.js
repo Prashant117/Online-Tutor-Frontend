@@ -38,9 +38,15 @@ const Dashboard = () => {
                     <EnrolledStudent />
                   </div>
                   <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
-                    <Link to="/tutor-post">
-                      <TutorPost />
-                    </Link>
+                    {profileStatusCode === 404 ? (
+                      <Link to="/update-profile/tutor">
+                        <TutorPost />
+                      </Link>
+                    ) : (
+                      <Link to="/tutor-post">
+                        <TutorPost />
+                      </Link>
+                    )}
                   </div>
                 </>
               )}

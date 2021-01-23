@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import profileImage from '../../images/ProfileImage.png';
 import Exam from './Exam';
 import Degree from './Degree';
@@ -7,8 +7,10 @@ import { Link, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { visitTutorProfile } from '../../actions/profile';
 import Spinner from '../../components/Spinner/Spinner';
+import Cookies from 'js-cookie';
 
 const VisitTutorProfile = () => {
+  const [info, setInfo] = useState({});
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch();
@@ -19,6 +21,17 @@ const VisitTutorProfile = () => {
   const { user } = useSelector((state) => state.auth);
   const profile = useSelector((state) => state.profile);
   const { loading } = profile;
+
+  useEffect(() => {
+    fetch(`http://localhost:5000/api/profile/visitor/${id}`, {
+      method: 'GET',
+      headers: {
+        token: Cookies.get('Token'),
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => setInfo(json?.data));
+  }, [id]);
 
   return (
     <div className="viewProfile">
@@ -41,10 +54,10 @@ const VisitTutorProfile = () => {
                 </div>
                 <div>
                   <h5>
-                    {user?.firstName} {user?.lastName}
+                    {info?.firstName} {info?.lastName}
                   </h5>
-                  <p>{user?.email}</p>
-                  <p>{user?.phone}</p>
+                  <p>{info?.email}</p>
+                  <p>{info?.phone}</p>
                   <span className="badge badge-info">Tutor</span>
                 </div>
               </div>

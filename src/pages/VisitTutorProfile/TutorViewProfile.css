@@ -1,0 +1,42 @@
+.viewProfile-card {
+    background: white;
+    box-shadow: 0px 0px 10px 4px lightgrey;
+    margin-top: 50px;
+    width: 100%;
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: 19px;
+}
+.viewProfile__basic-info {
+    position: relative;
+}
+.viewProfile__basic-info-image-wrapper {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    margin: 15px auto;
+}
+.viewProfile__basic-info-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 1px solid lightgray;
+}
+.badge {
+    padding: 5px 10px !important;
+    font-size: 13px !important;
+}
+
+.ssc-hsc {
+    display: flex;
+}
+
+.edit-profile {
+    background: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 7px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+}

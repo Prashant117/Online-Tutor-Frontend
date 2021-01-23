@@ -33,6 +33,7 @@ const TutorPost = () => {
             <PostCard
               key={post?._id}
               tutorName={post.tutorName}
+              tutorId={post.tutorId}
               image={post.image}
               qualification={post.qualification}
               subjectName={post.subjectName}

@@ -14,6 +14,7 @@ import Alert from '../components/Alert/Alert';
 import LiveClassHome from '../pages/LiveClass/Home';
 import LiveClass from '../pages/LiveClass/Video';
 import TutorPost from '../pages/TutorPost/TutorPost';
+import VisitTutorProfile from '../pages/VisitTutorProfile/TutorViewProfile';
 
 const Routes = () => {
   return (
@@ -64,6 +65,9 @@ const Routes = () => {
           </Route>
           <Route exact path="/tutor-post">
             <TutorPost />
+          </Route>
+          <Route exact path="/tutor-profile/:id">
+            <VisitTutorProfile />
           </Route>
           <Route path="*">
             <NotFound />

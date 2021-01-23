@@ -37,6 +37,19 @@
 .view-profile:focus {
     outline: none !important;
 }
+.view-profile-me {
+    border-radius: 4px;
+    background: gray;
+    cursor: text !important;
+    color: white;
+    padding: 4px 9px;
+    font-size: 13px;
+    margin-bottom: 15px;
+}
+.view-profile-me:focus {
+    outline: none !important;
+}
+
 .profile-name {
     margin-top: 15px;
     margin-bottom: 5px;

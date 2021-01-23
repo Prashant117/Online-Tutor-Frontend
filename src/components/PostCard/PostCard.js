@@ -15,6 +15,7 @@ const PostCard = ({
   payment,
   note,
   date,
+  enroll,
 }) => {
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   return (
@@ -62,7 +63,13 @@ const PostCard = ({
         <p className="font-italic">
           <Moment fromNow>{date}</Moment>
         </p>
-        {user?.status === 'student' && (
+        {user?.status === 'student' && enroll ? (
+          <div className="enroll">
+            <button style={{ background: 'gray', cursor: 'not-allowed' }}>
+              Enrolled by you
+            </button>
+          </div>
+        ) : (
           <div className="enroll">
             <button>Enroll now</button>
           </div>

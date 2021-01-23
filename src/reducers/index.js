@@ -4,6 +4,7 @@ import { educationReducer } from './educationReducer';
 import alert from './alert';
 import { profile } from './profile';
 import { post } from './tutorPost';
+import { enroll } from './enroll';
 
 const rootReducer = combineReducers({
   auth: authReducer,
@@ -11,6 +12,7 @@ const rootReducer = combineReducers({
   education: educationReducer,
   profile,
   post,
+  enroll,
 });
 
 export default rootReducer;

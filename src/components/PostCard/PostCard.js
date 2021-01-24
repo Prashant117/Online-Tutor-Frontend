@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import profileImage from '../../images/ProfileImage.png';
 import './PostCard.css';
 import Moment from 'react-moment';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { studentEnroll } from '../../actions/enroll';
 const PostCard = ({
+  postId,
   tutorName,
   tutorId,
   image,
@@ -17,7 +19,13 @@ const PostCard = ({
   date,
   enroll,
 }) => {
+  console.log(enroll);
+  const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const handleEnroll = () => {
+    dispatch(studentEnroll(tutorId, user?._id, postId));
+    window.location.reload();
+  };
   return (
     <div className="postCard">
       <div className="postCard__image-wrapper">
@@ -71,7 +79,7 @@ const PostCard = ({
           </div>
         ) : (
           <div className="enroll">
-            <button>Enroll now</button>
+            <button onClick={handleEnroll}>Enroll now</button>
           </div>
         )}
       </div>

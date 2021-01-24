@@ -16,51 +16,34 @@ const Home = () => {
   return (
     <div className="container my-4">
       <div className="row">
-        {loading ? (
+        {loading && postLoading ? (
           <Spinner />
         ) : (
           allPosts?.map((post) =>
-            !postLoading && getEnrolledPost?.length > 0 ? (
-              getEnrolledPost.map((enroll) => {
-                if (post._id === enroll.postId) {
-                  return (
-                    <PostCard
-                      key={post?._id}
-                      tutorName={post.tutorName}
-                      tutorId={post.tutorId}
-                      image={post.image}
-                      qualification={post.qualification}
-                      subjectName={post.subjectName}
-                      time={post.time}
-                      days={post.days}
-                      payment={post.payment}
-                      note={post.note}
-                      date={post.date}
-                      enroll={true}
-                    />
-                  );
-                } else {
-                  return (
-                    <PostCard
-                      key={post?._id}
-                      tutorName={post.tutorName}
-                      tutorId={post.tutorId}
-                      image={post.image}
-                      qualification={post.qualification}
-                      subjectName={post.subjectName}
-                      time={post.time}
-                      days={post.days}
-                      payment={post.payment}
-                      note={post.note}
-                      date={post.date}
-                      enroll={false}
-                    />
-                  );
+            getEnrolledPost?.length > 0 ? (
+              <PostCard
+                key={post?._id}
+                postId={post?._id}
+                tutorName={post.tutorName}
+                tutorId={post.tutorId}
+                image={post.image}
+                qualification={post.qualification}
+                subjectName={post.subjectName}
+                time={post.time}
+                days={post.days}
+                payment={post.payment}
+                note={post.note}
+                date={post.date}
+                enroll={
+                  getEnrolledPost?.find((enroll) => enroll.postId === post._id)
+                    ? true
+                    : false
                 }
-              })
+              />
             ) : (
               <PostCard
                 key={post?._id}
+                postId={post?._id}
                 tutorName={post.tutorName}
                 tutorId={post.tutorId}
                 image={post.image}

@@ -32,6 +32,7 @@ const Home = () => {
               payment={post.payment}
               note={post.note}
               date={post.date}
+              enrolledStudent={post.enrolled}
               enroll={post.enrolled.find((enroll) =>
                 enroll === user?._id ? true : false
               )}

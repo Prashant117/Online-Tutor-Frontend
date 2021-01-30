@@ -14,7 +14,7 @@ const StudentUpdateProfile = () => {
   const { register, handleSubmit } = useForm();
 
   //Inof
-  const [className, setClassName] = useState('');
+  const [classNames, setClassNames] = useState('');
   const [presentAddress, setPresentAddress] = useState('');
   const [permanentAddress, setPermanentAddress] = useState('');
   const [image, setImage] = useState('');
@@ -23,7 +23,7 @@ const StudentUpdateProfile = () => {
 
   useEffect(() => {
     setImage(`http://localhost:5000/public/${user?.profile?.image}`);
-    setClassName(user?.profile?.className);
+    setClassNames(user?.profile?.className);
     setPresentAddress(user?.profile?.presentAddress);
     setPermanentAddress(user?.profile?.permanentAddress);
   }, [user]);
@@ -32,10 +32,16 @@ const StudentUpdateProfile = () => {
 
   const onSubmit = (data) => {
     data.userId = user?._id;
-    if (image !== '') {
-      dispatch(studentUpdateProfile(data));
-      window.scrollTo(0, 0);
+
+    if (typeof image === 'string') {
+      data.image = user?.profile?.image;
+      console.log(data);
+    } else {
+      data.image = image;
     }
+    dispatch(studentUpdateProfile(data));
+    window.scrollTo(0, 0);
+    console.log(data);
   };
 
   return (
@@ -64,9 +70,9 @@ const StudentUpdateProfile = () => {
                       <div className="input-group">
                         <label className="label">Class name</label>
                         <input
-                          value={className}
+                          value={classNames}
                           ref={register}
-                          onChange={(e) => setClassName(e.target.value)}
+                          onChange={(e) => setClassNames(e.target.value)}
                           style={{ height: '50px' }}
                           className="input--style-4"
                           type="text"

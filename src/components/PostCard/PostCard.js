@@ -22,6 +22,7 @@ const PostCard = ({
   date,
   enroll,
   enrolled_student,
+  enrolledStudent,
 }) => {
   const [show, setShow] = useState(false);
 
@@ -79,6 +80,8 @@ const PostCard = ({
         <p className="font-italic">
           <Moment fromNow>{date}</Moment>
         </p>
+        {enrolledStudent && <p>{enrolledStudent?.length} students enrolled</p>}
+
         {enrolled_student && (
           <div
             style={{ cursor: 'pointer' }}

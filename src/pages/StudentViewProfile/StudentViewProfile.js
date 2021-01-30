@@ -3,7 +3,6 @@ import profileImage from '../../images/ProfileImage.png';
 import '../TutorViewProfile/TutorViewProfile.css';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { studentViewProfile } from '../../actions/profile';
 import Spinner from '../../components/Spinner/Spinner';
 
 const ViewProfile = () => {
@@ -34,7 +33,7 @@ const ViewProfile = () => {
                   </h5>
                   <p>{user?.email}</p>
                   <p>{user?.phone}</p>
-                  <span class="badge badge-info">Student</span>
+                  <span className="badge badge-info">Student</span>
                 </div>
                 <Link to="/update-profile/student">
                   <button className="edit-profile">Edit Profile</button>

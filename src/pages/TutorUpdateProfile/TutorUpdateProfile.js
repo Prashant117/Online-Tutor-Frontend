@@ -60,8 +60,12 @@ const TutorUpdateProfile = () => {
   const dispatch = useDispatch();
   const onSubmit = (data) => {
     data.userId = user?._id;
-    data.email = user?.email;
-    data.image = image;
+    if (typeof image === 'string') {
+      data.image = user?.profile?.image;
+      console.log(data);
+    } else {
+      data.image = image;
+    }
     dispatch(tutorUpdateProfile(data));
     window.scrollTo(0, 0);
   };

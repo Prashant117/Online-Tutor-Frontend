@@ -32,27 +32,3 @@ export const studentEnroll = (tutorId, studentId, postId) => async (
     }
   }
 };
-
-//GET ENROLLED POST BY STUDENT ID
-export const getEnrolledPostByStudentId = (id) => async (dispatch) => {
-  console.log(id);
-  const token = Cookies.get('Token');
-  const config = {
-    headers: {
-      token: token,
-    },
-  };
-  try {
-    const res = await axios.get(`${BASE_URL}/enroll/student/${id}`, config);
-    console.log(res);
-    dispatch({
-      type: GET_ENROLLED_POST_BY_STUDENT_ID,
-      payload: res?.data?.data,
-    });
-  } catch (error) {
-    const errors = error?.response?.data?.message;
-    if (errors) {
-      dispatch(setAlert(errors, 'danger'));
-    }
-  }
-};

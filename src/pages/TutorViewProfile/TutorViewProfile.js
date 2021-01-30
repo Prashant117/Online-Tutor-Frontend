@@ -4,21 +4,11 @@ import Exam from './Exam';
 import Degree from './Degree';
 import './TutorViewProfile.css';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { tutorViewProfile } from '../../actions/profile';
+import { useSelector } from 'react-redux';
 import Spinner from '../../components/Spinner/Spinner';
 
 const ViewProfile = () => {
-  const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
-  useEffect(() => {
-    if (user?.status === 'tutor') {
-      dispatch(tutorViewProfile(user?._id));
-    }
-  }, [user, dispatch]);
-
-  const profile = useSelector((state) => state.profile);
-  const { loading } = profile;
+  const { user, loading } = useSelector((state) => state.auth);
 
   return (
     <div className="viewProfile">
@@ -32,8 +22,8 @@ const ViewProfile = () => {
                 <div className="viewProfile__basic-info-image-wrapper">
                   <img
                     src={
-                      profile?.tutorViewProfile?.image
-                        ? `http://localhost:5000/public/${profile?.tutorViewProfile?.image}`
+                      user?.profile?.image
+                        ? `http://localhost:5000/public/${user?.profile?.image}`
                         : profileImage
                     }
                     alt=""
@@ -59,28 +49,28 @@ const ViewProfile = () => {
                     <h5>SSC</h5>
                     <Exam
                       examination={
-                        profile?.tutorViewProfile?.ssc?.examination
-                          ? profile?.tutorViewProfile?.ssc?.examination
+                        user?.profile?.ssc?.examination
+                          ? user?.profile?.ssc?.examination
                           : 'N/A'
                       }
                       group={
-                        profile?.tutorViewProfile?.ssc?.group
-                          ? profile?.tutorViewProfile?.ssc?.group
+                        user?.profile?.ssc?.group
+                          ? user?.profile?.ssc?.group
                           : 'N/A'
                       }
                       board={
-                        profile?.tutorViewProfile?.ssc?.board
-                          ? profile?.tutorViewProfile?.ssc?.board
+                        user?.profile?.ssc?.board
+                          ? user?.profile?.ssc?.board
                           : 'N/A'
                       }
                       passingYear={
-                        profile?.tutorViewProfile?.ssc?.passingYear
-                          ? profile?.tutorViewProfile?.ssc?.passingYear
+                        user?.profile?.ssc?.passingYear
+                          ? user?.profile?.ssc?.passingYear
                           : 'N/A'
                       }
                       result={
-                        profile?.tutorViewProfile?.ssc?.result
-                          ? profile?.tutorViewProfile?.ssc?.result
+                        user?.profile?.ssc?.result
+                          ? user?.profile?.ssc?.result
                           : 'N/A'
                       }
                     />
@@ -92,28 +82,28 @@ const ViewProfile = () => {
                     <div style={{ marginTop: '20px' }}>
                       <Exam
                         examination={
-                          profile?.tutorViewProfile?.hsc?.examination
-                            ? profile?.tutorViewProfile?.hsc?.examination
+                          user?.profile?.hsc?.examination
+                            ? user?.profile?.hsc?.examination
                             : 'N/A'
                         }
                         group={
-                          profile?.tutorViewProfile?.hsc?.group
-                            ? profile?.tutorViewProfile?.hsc?.group
+                          user?.profile?.hsc?.group
+                            ? user?.profile?.hsc?.group
                             : 'N/A'
                         }
                         board={
-                          profile?.tutorViewProfile?.hsc?.board
-                            ? profile?.tutorViewProfile?.hsc?.board
+                          user?.profile?.hsc?.board
+                            ? user?.profile?.hsc?.board
                             : 'N/A'
                         }
                         passingYear={
-                          profile?.tutorViewProfile?.hsc?.passingYear
-                            ? profile?.tutorViewProfile?.hsc?.passingYear
+                          user?.profile?.hsc?.passingYear
+                            ? user?.profile?.hsc?.passingYear
                             : 'N/A'
                         }
                         result={
-                          profile?.tutorViewProfile?.hsc?.result
-                            ? profile?.tutorViewProfile?.hsc?.result
+                          user?.profile?.hsc?.result
+                            ? user?.profile?.hsc?.result
                             : 'N/A'
                         }
                       />
@@ -129,28 +119,28 @@ const ViewProfile = () => {
                     <h5>Graduation</h5>
                     <Degree
                       degree={
-                        profile?.tutorViewProfile?.graduation?.degree
-                          ? profile?.tutorViewProfile?.graduation?.degree
+                        user?.profile?.graduation?.degree
+                          ? user?.profile?.graduation?.degree
                           : 'N/A'
                       }
                       subject={
-                        profile?.tutorViewProfile?.graduation?.subject
-                          ? profile?.tutorViewProfile?.graduation?.subject
+                        user?.profile?.graduation?.subject
+                          ? user?.profile?.graduation?.subject
                           : 'N/A'
                       }
                       board={
-                        profile?.tutorViewProfile?.graduation?.board
-                          ? profile?.tutorViewProfile?.graduation?.board
+                        user?.profile?.graduation?.board
+                          ? user?.profile?.graduation?.board
                           : 'N/A'
                       }
                       passingYear={
-                        profile?.tutorViewProfile?.graduation?.passingYear
-                          ? profile?.tutorViewProfile?.graduation?.passingYear
+                        user?.profile?.graduation?.passingYear
+                          ? user?.profile?.graduation?.passingYear
                           : 'N/A'
                       }
                       result={
-                        profile?.tutorViewProfile?.graduation?.result
-                          ? profile?.tutorViewProfile?.graduation?.result
+                        user?.profile?.graduation?.result
+                          ? user?.profile?.graduation?.result
                           : 'N/A'
                       }
                     />
@@ -162,28 +152,28 @@ const ViewProfile = () => {
                     <div style={{ marginTop: '20px' }}>
                       <Degree
                         degree={
-                          profile?.tutorViewProfile?.master?.degree
-                            ? profile?.tutorViewProfile?.master?.degree
+                          user?.profile?.master?.degree
+                            ? user?.profile?.master?.degree
                             : 'N/A'
                         }
                         subject={
-                          profile?.tutorViewProfile?.master?.subject
-                            ? profile?.tutorViewProfile?.master?.subject
+                          user?.profile?.master?.subject
+                            ? user?.profile?.master?.subject
                             : 'N/A'
                         }
                         board={
-                          profile?.tutorViewProfile?.master?.board
-                            ? profile?.tutorViewProfile?.master?.board
+                          user?.profile?.master?.board
+                            ? user?.profile?.master?.board
                             : 'N/A'
                         }
                         passingYear={
-                          profile?.tutorViewProfile?.master?.passingYear
-                            ? profile?.tutorViewProfile?.master?.passingYear
+                          user?.profile?.master?.passingYear
+                            ? user?.profile?.master?.passingYear
                             : 'N/A'
                         }
                         result={
-                          profile?.tutorViewProfile?.master?.result
-                            ? profile?.tutorViewProfile?.master?.result
+                          user?.profile?.master?.result
+                            ? user?.profile?.master?.result
                             : 'N/A'
                         }
                       />
@@ -203,8 +193,8 @@ const ViewProfile = () => {
                       Speciality:{' '}
                     </span>
                     <span>
-                      {profile?.tutorViewProfile?.speciality
-                        ? profile?.tutorViewProfile?.speciality
+                      {user?.profile?.speciality
+                        ? user?.profile?.speciality
                         : 'N/A'}{' '}
                     </span>
                   </div>
@@ -214,8 +204,8 @@ const ViewProfile = () => {
                       Present Address:{' '}
                     </span>
                     <span>
-                      {profile?.tutorViewProfile?.presentAddress
-                        ? profile?.tutorViewProfile?.presentAddress
+                      {user?.profile?.presentAddress
+                        ? user?.profile?.presentAddress
                         : 'N/A'}{' '}
                     </span>
                   </div>
@@ -225,8 +215,8 @@ const ViewProfile = () => {
                       Permanent Address:{' '}
                     </span>
                     <span>
-                      {profile?.tutorViewProfile?.permanentAddress
-                        ? profile?.tutorViewProfile?.permanentAddress
+                      {user?.profile?.permanentAddress
+                        ? user?.profile?.permanentAddress
                         : 'N/A'}{' '}
                     </span>
                   </div>

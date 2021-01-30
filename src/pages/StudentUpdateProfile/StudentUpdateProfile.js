@@ -12,38 +12,30 @@ import Spinner from '../../components/Spinner/Spinner';
 const StudentUpdateProfile = () => {
   const dispatch = useDispatch();
   const { register, handleSubmit } = useForm();
-  const { user } = useSelector((state) => state.auth);
 
   //Inof
   const [className, setClassName] = useState('');
   const [presentAddress, setPresentAddress] = useState('');
   const [permanentAddress, setPermanentAddress] = useState('');
-  const [image, setImage] = useState(profileImage);
+  const [image, setImage] = useState('');
+
+  const { user, loading } = useSelector((state) => state.auth);
 
   useEffect(() => {
-    if (user?.status === 'student') {
-      dispatch(studentViewProfile(user?._id));
-    }
-  }, [user, dispatch]);
+    setImage(`http://localhost:5000/public/${user?.profile?.image}`);
+    setClassName(user?.profile?.className);
+    setPresentAddress(user?.profile?.presentAddress);
+    setPermanentAddress(user?.profile?.permanentAddress);
+  }, [user]);
 
-  const profile = useSelector((state) => state.profile);
-  const { loading } = profile;
-
-  useEffect(() => {
-    setImage(
-      `http://localhost:5000/public/${profile?.studentViewProfile?.image}`
-    );
-    setClassName(profile?.studentViewProfile?.className);
-    setPresentAddress(profile?.studentViewProfile?.presentAddress);
-    setPermanentAddress(profile?.studentViewProfile?.permanentAddress);
-  }, [profile]);
+  console.log(image);
 
   const onSubmit = (data) => {
     data.userId = user?._id;
-    data.email = user?.email;
-    data.image = image;
-    dispatch(studentUpdateProfile(data));
-    window.scrollTo(0, 0);
+    if (image !== '') {
+      dispatch(studentUpdateProfile(data));
+      window.scrollTo(0, 0);
+    }
   };
 
   return (

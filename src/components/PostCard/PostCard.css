@@ -63,3 +63,14 @@
 .enroll button:focus {
     outline: none !important;
 }
+
+.enrolled_student_popup {
+    background: aliceblue;
+    padding: 10px 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0px 0px 12px 3px gainsboro;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}

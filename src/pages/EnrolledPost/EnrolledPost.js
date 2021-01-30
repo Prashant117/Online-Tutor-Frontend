@@ -1,28 +1,28 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getEnrolledPostByStudentId } from '../../actions/enroll';
-import { getAllTutorPosts } from '../../actions/tutorPost';
+import { studentViewProfile } from '../../actions/profile';
 import EnrolledPostCard from '../../components/EnrolledPostCard/PostCard';
 import Spinner from '../../components/Spinner/Spinner';
 const EnrolledPost = () => {
   const dispatch = useDispatch();
+
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
-    dispatch(getAllTutorPosts());
-    dispatch(getEnrolledPostByStudentId(user?._id));
+    if (user?.status === 'student') {
+      dispatch(studentViewProfile(user?._id));
+    }
   }, [user, dispatch]);
-  const { allPosts, loading } = useSelector((state) => state.post);
-  const { getEnrolledPost, postLoading } = useSelector((state) => state.enroll);
+  const profile = useSelector((state) => state.profile);
+
   return (
     <div className="container my-4">
       <div className="row">
-        {loading && postLoading ? (
+        {profile?.loading ? (
           <Spinner />
-        ) : getEnrolledPost?.length > 0 ? (
-          allPosts?.map((post) => (
+        ) : profile?.studentViewProfile?.enrolled_post?.length > 0 ? (
+          profile?.studentViewProfile?.enrolled_post?.map((post, index) => (
             <EnrolledPostCard
-              key={post?._id}
-              postId={post?._id}
+              key={index}
               tutorName={post.tutorName}
               tutorId={post.tutorId}
               image={post.image}
@@ -33,10 +33,7 @@ const EnrolledPost = () => {
               payment={post.payment}
               note={post.note}
               date={post.date}
-              enroll={
-                getEnrolledPost?.find((enroll) => enroll.postId === post._id) &&
-                true
-              }
+              enroll={true}
             />
           ))
         ) : (

@@ -10,7 +10,6 @@ import Spinner from '../../components/Spinner/Spinner';
 import Cookies from 'js-cookie';
 
 const VisitTutorProfile = () => {
-  const [info, setInfo] = useState({});
   const { id } = useParams();
   console.log(id);
   const dispatch = useDispatch();
@@ -21,17 +20,6 @@ const VisitTutorProfile = () => {
   const { user } = useSelector((state) => state.auth);
   const profile = useSelector((state) => state.profile);
   const { loading } = profile;
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/api/profile/visitor/${id}`, {
-      method: 'GET',
-      headers: {
-        token: Cookies.get('Token'),
-      },
-    })
-      .then((res) => res.json())
-      .then((json) => setInfo(json?.data));
-  }, [id]);
 
   return (
     <div className="viewProfile">
@@ -46,7 +34,7 @@ const VisitTutorProfile = () => {
                   <img
                     src={
                       profile?.visitTutorProfile?.image
-                        ? `http://localhost:5000/public/${profile?.visitTutorProfile?.image}`
+                        ? `http://localhost:5000/public/${profile?.visitTutorProfile?.profile?.image}`
                         : profileImage
                     }
                     alt=""
@@ -54,10 +42,11 @@ const VisitTutorProfile = () => {
                 </div>
                 <div>
                   <h5>
-                    {info?.firstName} {info?.lastName}
+                    {profile?.visitTutorProfile?.firstName}{' '}
+                    {profile?.visitTutorProfile?.lastName}
                   </h5>
-                  <p>{info?.email}</p>
-                  <p>{info?.phone}</p>
+                  <p>{profile?.visitTutorProfile?.email}</p>
+                  <p>{profile?.visitTutorProfile?.phone}</p>
                   <span className="badge badge-info">Tutor</span>
                 </div>
               </div>
@@ -69,28 +58,30 @@ const VisitTutorProfile = () => {
                     <h5>SSC</h5>
                     <Exam
                       examination={
-                        profile?.visitTutorProfile?.ssc?.examination
-                          ? profile?.visitTutorProfile?.ssc?.examination
+                        profile?.visitTutorProfile?.profile?.ssc?.examination
+                          ? profile?.visitTutorProfile?.profile?.ssc
+                              ?.examination
                           : 'N/A'
                       }
                       group={
-                        profile?.visitTutorProfile?.ssc?.group
-                          ? profile?.visitTutorProfile?.ssc?.group
+                        profile?.visitTutorProfile?.profile?.ssc?.group
+                          ? profile?.visitTutorProfile?.profile?.ssc?.group
                           : 'N/A'
                       }
                       board={
-                        profile?.visitTutorProfile?.ssc?.board
-                          ? profile?.visitTutorProfile?.ssc?.board
+                        profile?.visitTutorProfile?.profile?.ssc?.board
+                          ? profile?.visitTutorProfile?.profile?.ssc?.board
                           : 'N/A'
                       }
                       passingYear={
-                        profile?.visitTutorProfile?.ssc?.passingYear
-                          ? profile?.visitTutorProfile?.ssc?.passingYear
+                        profile?.visitTutorProfile?.profile?.ssc?.passingYear
+                          ? profile?.visitTutorProfile?.profile?.ssc
+                              ?.passingYear
                           : 'N/A'
                       }
                       result={
-                        profile?.visitTutorProfile?.ssc?.result
-                          ? profile?.visitTutorProfile?.ssc?.result
+                        profile?.visitTutorProfile?.profile?.ssc?.result
+                          ? profile?.visitTutorProfile?.profile?.ssc?.result
                           : 'N/A'
                       }
                     />
@@ -102,28 +93,30 @@ const VisitTutorProfile = () => {
                     <div style={{ marginTop: '20px' }}>
                       <Exam
                         examination={
-                          profile?.visitTutorProfile?.hsc?.examination
-                            ? profile?.visitTutorProfile?.hsc?.examination
+                          profile?.visitTutorProfile?.profile?.hsc?.examination
+                            ? profile?.visitTutorProfile?.profile?.hsc
+                                ?.examination
                             : 'N/A'
                         }
                         group={
-                          profile?.visitTutorProfile?.hsc?.group
-                            ? profile?.visitTutorProfile?.hsc?.group
+                          profile?.visitTutorProfile?.profile?.hsc?.group
+                            ? profile?.visitTutorProfile?.profile?.hsc?.group
                             : 'N/A'
                         }
                         board={
-                          profile?.visitTutorProfile?.hsc?.board
-                            ? profile?.visitTutorProfile?.hsc?.board
+                          profile?.visitTutorProfile?.profile?.hsc?.board
+                            ? profile?.visitTutorProfile?.profile?.hsc?.board
                             : 'N/A'
                         }
                         passingYear={
-                          profile?.visitTutorProfile?.hsc?.passingYear
-                            ? profile?.visitTutorProfile?.hsc?.passingYear
+                          profile?.visitTutorProfile?.profile?.hsc?.passingYear
+                            ? profile?.visitTutorProfile?.profile?.hsc
+                                ?.passingYear
                             : 'N/A'
                         }
                         result={
-                          profile?.visitTutorProfile?.hsc?.result
-                            ? profile?.visitTutorProfile?.hsc?.result
+                          profile?.visitTutorProfile?.profile?.hsc?.result
+                            ? profile?.visitTutorProfile?.profile?.hsc?.result
                             : 'N/A'
                         }
                       />
@@ -139,28 +132,34 @@ const VisitTutorProfile = () => {
                     <h5>Graduation</h5>
                     <Degree
                       degree={
-                        profile?.visitTutorProfile?.graduation?.degree
-                          ? profile?.visitTutorProfile?.graduation?.degree
+                        profile?.visitTutorProfile?.profile?.graduation?.degree
+                          ? profile?.visitTutorProfile?.profile?.graduation
+                              ?.degree
                           : 'N/A'
                       }
                       subject={
-                        profile?.visitTutorProfile?.graduation?.subject
-                          ? profile?.visitTutorProfile?.graduation?.subject
+                        profile?.visitTutorProfile?.profile?.graduation?.subject
+                          ? profile?.visitTutorProfile?.profile?.graduation
+                              ?.subject
                           : 'N/A'
                       }
                       board={
-                        profile?.visitTutorProfile?.graduation?.board
-                          ? profile?.visitTutorProfile?.graduation?.board
+                        profile?.visitTutorProfile?.profile?.graduation?.board
+                          ? profile?.visitTutorProfile?.profile?.graduation
+                              ?.board
                           : 'N/A'
                       }
                       passingYear={
-                        profile?.visitTutorProfile?.graduation?.passingYear
-                          ? profile?.visitTutorProfile?.graduation?.passingYear
+                        profile?.visitTutorProfile?.profile?.graduation
+                          ?.passingYear
+                          ? profile?.visitTutorProfile?.profile?.graduation
+                              ?.passingYear
                           : 'N/A'
                       }
                       result={
-                        profile?.visitTutorProfile?.graduation?.result
-                          ? profile?.visitTutorProfile?.graduation?.result
+                        profile?.visitTutorProfile?.profile?.graduation?.result
+                          ? profile?.visitTutorProfile?.profile?.graduation
+                              ?.result
                           : 'N/A'
                       }
                     />
@@ -172,28 +171,33 @@ const VisitTutorProfile = () => {
                     <div style={{ marginTop: '20px' }}>
                       <Degree
                         degree={
-                          profile?.visitTutorProfile?.master?.degree
-                            ? profile?.visitTutorProfile?.master?.degree
+                          profile?.visitTutorProfile?.profile?.master?.degree
+                            ? profile?.visitTutorProfile?.profile?.master
+                                ?.degree
                             : 'N/A'
                         }
                         subject={
-                          profile?.visitTutorProfile?.master?.subject
-                            ? profile?.visitTutorProfile?.master?.subject
+                          profile?.visitTutorProfile?.profile?.master?.subject
+                            ? profile?.visitTutorProfile?.profile?.master
+                                ?.subject
                             : 'N/A'
                         }
                         board={
-                          profile?.visitTutorProfile?.master?.board
-                            ? profile?.visitTutorProfile?.master?.board
+                          profile?.visitTutorProfile?.profile?.master?.board
+                            ? profile?.visitTutorProfile?.profile?.master?.board
                             : 'N/A'
                         }
                         passingYear={
-                          profile?.visitTutorProfile?.master?.passingYear
-                            ? profile?.visitTutorProfile?.master?.passingYear
+                          profile?.visitTutorProfile?.profile?.master
+                            ?.passingYear
+                            ? profile?.visitTutorProfile?.profile?.master
+                                ?.passingYear
                             : 'N/A'
                         }
                         result={
-                          profile?.visitTutorProfile?.master?.result
-                            ? profile?.visitTutorProfile?.master?.result
+                          profile?.visitTutorProfile?.profile?.master?.result
+                            ? profile?.visitTutorProfile?.profile?.master
+                                ?.result
                             : 'N/A'
                         }
                       />
@@ -213,8 +217,8 @@ const VisitTutorProfile = () => {
                       Speciality:{' '}
                     </span>
                     <span>
-                      {profile?.visitTutorProfile?.speciality
-                        ? profile?.visitTutorProfile?.speciality
+                      {profile?.visitTutorProfile?.profile?.speciality
+                        ? profile?.visitTutorProfile?.profile?.speciality
                         : 'N/A'}{' '}
                     </span>
                   </div>
@@ -224,8 +228,8 @@ const VisitTutorProfile = () => {
                       Present Address:{' '}
                     </span>
                     <span>
-                      {profile?.visitTutorProfile?.presentAddress
-                        ? profile?.visitTutorProfile?.presentAddress
+                      {profile?.visitTutorProfile?.profile?.presentAddress
+                        ? profile?.visitTutorProfile?.profile?.presentAddress
                         : 'N/A'}{' '}
                     </span>
                   </div>
@@ -235,8 +239,8 @@ const VisitTutorProfile = () => {
                       Permanent Address:{' '}
                     </span>
                     <span>
-                      {profile?.visitTutorProfile?.permanentAddress
-                        ? profile?.visitTutorProfile?.permanentAddress
+                      {profile?.visitTutorProfile?.profile?.permanentAddress
+                        ? profile?.visitTutorProfile?.profile?.permanentAddress
                         : 'N/A'}{' '}
                     </span>
                   </div>

@@ -24,7 +24,7 @@ import Spinner from '../../components/Spinner/Spinner';
 
 const TutorUpdateProfile = () => {
   const { register, handleSubmit } = useForm();
-  const { user } = useSelector((state) => state.auth);
+  const { user, loading } = useSelector((state) => state.auth);
   console.log(user);
   // SSC
   const [sscExamination, setSscExamination] = useState('');
@@ -67,14 +67,6 @@ const TutorUpdateProfile = () => {
   };
 
   useEffect(() => {
-    if (user?.status === 'tutor') {
-      dispatch(tutorViewProfile(user?._id));
-    }
-  }, [user, dispatch]);
-  const profile = useSelector((state) => state.profile);
-  const { loading } = profile;
-
-  useEffect(() => {
     dispatch(getSSCLevel());
     dispatch(getHSCLevel());
     dispatch(getBoardName());
@@ -87,41 +79,37 @@ const TutorUpdateProfile = () => {
 
   useEffect(() => {
     //Image
-    setImage(
-      `http://localhost:5000/public/${profile?.tutorViewProfile?.image}`
-    );
+    setImage(`http://localhost:5000/public/${user?.profile?.image}`);
     //ssc
-    setSscExamination(profile?.tutorViewProfile?.ssc?.examination);
-    setSscGroup(profile?.tutorViewProfile?.ssc?.group);
-    setSscBoard(profile?.tutorViewProfile?.ssc?.board);
-    setSscPassingYear(profile?.tutorViewProfile?.ssc?.passingYear);
-    setSscResult(profile?.tutorViewProfile?.ssc?.result);
+    setSscExamination(user?.profile?.ssc?.examination);
+    setSscGroup(user?.profile?.ssc?.group);
+    setSscBoard(user?.profile?.ssc?.board);
+    setSscPassingYear(user?.profile?.ssc?.passingYear);
+    setSscResult(user?.profile?.ssc?.result);
     //hsc
-    setHscExamination(profile?.tutorViewProfile?.hsc?.examination);
-    setHscGroup(profile?.tutorViewProfile?.hsc?.group);
-    setHscBoard(profile?.tutorViewProfile?.hsc?.board);
-    setHscPassingYear(profile?.tutorViewProfile?.hsc?.passingYear);
-    setHscResult(profile?.tutorViewProfile?.hsc?.result);
+    setHscExamination(user?.profile?.hsc?.examination);
+    setHscGroup(user?.profile?.hsc?.group);
+    setHscBoard(user?.profile?.hsc?.board);
+    setHscPassingYear(user?.profile?.hsc?.passingYear);
+    setHscResult(user?.profile?.hsc?.result);
     //Degree
-    setGraduationDegree(profile?.tutorViewProfile?.graduation?.degree);
-    setGraduationSubject(profile?.tutorViewProfile?.graduation?.subject);
-    setGraduationBoard(profile?.tutorViewProfile?.graduation?.board);
-    setGraduationPassingYear(
-      profile?.tutorViewProfile?.graduation?.passingYear
-    );
-    setGraduationResult(profile?.tutorViewProfile?.graduation?.result);
+    setGraduationDegree(user?.profile?.graduation?.degree);
+    setGraduationSubject(user?.profile?.graduation?.subject);
+    setGraduationBoard(user?.profile?.graduation?.board);
+    setGraduationPassingYear(user?.profile?.graduation?.passingYear);
+    setGraduationResult(user?.profile?.graduation?.result);
     //Master
 
-    setMasterDegree(profile?.tutorViewProfile?.master?.degree);
-    setMasterSubject(profile?.tutorViewProfile?.master?.subject);
-    setMasterBoard(profile?.tutorViewProfile?.master?.board);
-    setMasterPassingYear(profile?.tutorViewProfile?.master?.passingYear);
-    setMasterResult(profile?.tutorViewProfile?.master?.result);
+    setMasterDegree(user?.profile?.master?.degree);
+    setMasterSubject(user?.profile?.master?.subject);
+    setMasterBoard(user?.profile?.master?.board);
+    setMasterPassingYear(user?.profile?.master?.passingYear);
+    setMasterResult(user?.profile?.master?.result);
     //Info
-    setSpeciality(profile?.tutorViewProfile?.speciality);
-    setPresentAddress(profile?.tutorViewProfile?.presentAddress);
-    setPermanentAddress(profile?.tutorViewProfile?.permanentAddress);
-  }, [profile]);
+    setSpeciality(user?.profile?.speciality);
+    setPresentAddress(user?.profile?.presentAddress);
+    setPermanentAddress(user?.profile?.permanentAddress);
+  }, [user]);
 
   return (
     <>

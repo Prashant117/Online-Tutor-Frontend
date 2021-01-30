@@ -5,6 +5,9 @@ import Moment from 'react-moment';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { studentEnroll } from '../../actions/enroll';
+import { Avatar } from '@material-ui/core';
+import AvatarGroup from '@material-ui/lab/AvatarGroup';
+import { Modal } from 'react-bootstrap';
 const PostCard = ({
   postId,
   tutorName,
@@ -18,8 +21,13 @@ const PostCard = ({
   note,
   date,
   enroll,
+  enrolled_student,
 }) => {
-  console.log(enroll);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   const handleEnroll = () => {
@@ -71,6 +79,27 @@ const PostCard = ({
         <p className="font-italic">
           <Moment fromNow>{date}</Moment>
         </p>
+        {enrolled_student && (
+          <div
+            style={{ cursor: 'pointer' }}
+            onClick={handleShow}
+            className="d-flex align-items-center justify-content-around"
+          >
+            <AvatarGroup max={3}>
+              {enrolled_student?.length > 0 &&
+                enrolled_student?.map((student) => (
+                  <Avatar
+                    alt={`${student.firstName}`}
+                    src={`http://localhost:5000/public/${student?.profile?.image}`}
+                  />
+                ))}
+            </AvatarGroup>
+            {enrolled_student?.length === 0 && 0}
+            {`${enrolled_student?.length > 1 ? ' students' : ' student'}`}{' '}
+            enrolled
+          </div>
+        )}
+
         {user?.status === 'student' && enroll ? (
           <div className="enroll">
             <button style={{ background: 'gray', cursor: 'not-allowed' }}>
@@ -78,11 +107,42 @@ const PostCard = ({
             </button>
           </div>
         ) : (
-          <div className="enroll">
-            <button onClick={handleEnroll}>Enroll now</button>
-          </div>
+          user?.status === 'student' && (
+            <div className="enroll">
+              <button onClick={handleEnroll}>Enroll now</button>
+            </div>
+          )
         )}
       </div>
+      <Modal
+        show={show}
+        onHide={handleClose}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Enrolled Students</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div>
+            {enrolled_student?.length > 0
+              ? enrolled_student?.map((student) => (
+                  <Link to={`/student-profile/${student?.profile?.userId}`}>
+                    <div className="enrolled_student_popup">
+                      {' '}
+                      <Avatar
+                        src={`http://localhost:5000/public/${student.profile.image}`}
+                      />
+                      <p style={{ marginBottom: '0px', marginLeft: '10px' }}>
+                        {student?.firstName} {student?.lastName}
+                      </p>
+                    </div>
+                  </Link>
+                ))
+              : '0 students enrolled'}
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 };

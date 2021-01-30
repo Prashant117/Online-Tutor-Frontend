@@ -7,19 +7,18 @@ import { tutorPost } from '../../actions/tutorPost';
 const AddTutorPost = ({ show, handleClose, handleShow }) => {
   const { handleSubmit, register, errors } = useForm();
   const { user } = useSelector((state) => state.auth);
-  const { tutorViewProfile } = useSelector((state) => state.profile);
 
   const dispatch = useDispatch();
   let qualification;
 
-  if (tutorViewProfile?.master) {
-    qualification = tutorViewProfile?.master?.degree;
-  } else if (tutorViewProfile?.graduation) {
-    qualification = tutorViewProfile?.graduation?.degree;
-  } else if (tutorViewProfile?.hsc) {
-    qualification = tutorViewProfile?.hsc?.examination;
-  } else if (tutorViewProfile?.ssc) {
-    qualification = tutorViewProfile?.ssc?.examination;
+  if (user?.profile?.master) {
+    qualification = user?.profile?.master?.degree;
+  } else if (user?.profile?.graduation) {
+    qualification = user?.profile?.graduation?.degree;
+  } else if (user?.profile?.hsc) {
+    qualification = user?.profile?.hsc?.examination;
+  } else if (user?.profile?.ssc) {
+    qualification = user?.profile?.ssc?.examination;
   } else {
     qualification = 'N/A';
   }
@@ -28,7 +27,7 @@ const AddTutorPost = ({ show, handleClose, handleShow }) => {
     data.tutorId = user?._id;
     const name = user?.firstName + user?.lastName;
     data.tutorName = name;
-    data.image = tutorViewProfile.image;
+    data.image = user?.profile?.image;
     data.qualification = qualification;
     console.log(data);
     dispatch(tutorPost(data));

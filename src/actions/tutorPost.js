@@ -75,7 +75,7 @@ export const getSpecificTutorPosts = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(`${BASE_URL}/tutor-post/${id}`, config);
+    const res = await axios.get(`${BASE_URL}/enroll/tutor/${id}`, config);
     console.log(res);
     dispatch({
       type: SPECIFIC_TUTOR_POST,

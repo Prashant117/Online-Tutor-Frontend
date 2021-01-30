@@ -8,15 +8,7 @@ import Spinner from '../../components/Spinner/Spinner';
 
 const ViewProfile = () => {
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.auth);
-  useEffect(() => {
-    if (user?.status === 'student') {
-      dispatch(studentViewProfile(user?._id));
-    }
-  }, [user, dispatch]);
-
-  const profile = useSelector((state) => state.profile);
-  const { loading } = profile;
+  const { user, loading } = useSelector((state) => state.auth);
   return (
     <>
       {loading ? (
@@ -29,8 +21,8 @@ const ViewProfile = () => {
                 <div className="viewProfile__basic-info-image-wrapper">
                   <img
                     src={
-                      profile?.studentViewProfile?.image
-                        ? `http://localhost:5000/public/${profile?.studentViewProfile?.image}`
+                      user?.profile?.image
+                        ? `http://localhost:5000/public/${user?.profile?.image}`
                         : profileImage
                     }
                     alt=""
@@ -61,8 +53,8 @@ const ViewProfile = () => {
                       Class Name:{' '}
                     </span>
                     <span>
-                      {profile?.studentViewProfile?.className
-                        ? profile?.studentViewProfile?.className
+                      {user?.profile?.className
+                        ? user?.profile?.className
                         : 'N/A'}
                     </span>
                   </div>
@@ -72,8 +64,8 @@ const ViewProfile = () => {
                       Present Address:{' '}
                     </span>
                     <span>
-                      {profile?.studentViewProfile?.presentAddress
-                        ? profile?.studentViewProfile?.presentAddress
+                      {user?.profile?.presentAddress
+                        ? user?.profile?.presentAddress
                         : 'N/A'}{' '}
                     </span>
                   </div>
@@ -83,8 +75,8 @@ const ViewProfile = () => {
                       Permanent Address:{' '}
                     </span>
                     <span>
-                      {profile?.studentViewProfile?.permanentAddress
-                        ? profile?.studentViewProfile?.permanentAddress
+                      {user?.profile?.permanentAddress
+                        ? user?.profile?.permanentAddress
                         : 'N/A'}{' '}
                     </span>
                   </div>

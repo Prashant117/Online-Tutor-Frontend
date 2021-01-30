@@ -9,55 +9,34 @@ const Home = () => {
   const { user } = useSelector((state) => state.auth);
   useEffect(() => {
     dispatch(getAllTutorPosts());
-    dispatch(getEnrolledPostByStudentId(user?._id));
   }, [user, dispatch]);
   const { allPosts, loading } = useSelector((state) => state.post);
-  const { getEnrolledPost, postLoading } = useSelector((state) => state.enroll);
+
   return (
     <div className="container my-4">
       <div className="row">
-        {loading && postLoading ? (
+        {loading ? (
           <Spinner />
         ) : (
-          allPosts?.map((post) =>
-            getEnrolledPost?.length > 0 ? (
-              <PostCard
-                key={post?._id}
-                postId={post?._id}
-                tutorName={post.tutorName}
-                tutorId={post.tutorId}
-                image={post.image}
-                qualification={post.qualification}
-                subjectName={post.subjectName}
-                time={post.time}
-                days={post.days}
-                payment={post.payment}
-                note={post.note}
-                date={post.date}
-                enroll={
-                  getEnrolledPost?.find((enroll) => enroll.postId === post._id)
-                    ? true
-                    : false
-                }
-              />
-            ) : (
-              <PostCard
-                key={post?._id}
-                postId={post?._id}
-                tutorName={post.tutorName}
-                tutorId={post.tutorId}
-                image={post.image}
-                qualification={post.qualification}
-                subjectName={post.subjectName}
-                time={post.time}
-                days={post.days}
-                payment={post.payment}
-                note={post.note}
-                date={post.date}
-                enroll={false}
-              />
-            )
-          )
+          allPosts?.map((post) => (
+            <PostCard
+              key={post?._id}
+              postId={post?._id}
+              tutorName={post.tutorName}
+              tutorId={post.tutorId}
+              image={post.image}
+              qualification={post.qualification}
+              subjectName={post.subjectName}
+              time={post.time}
+              days={post.days}
+              payment={post.payment}
+              note={post.note}
+              date={post.date}
+              enroll={post.enrolled.find((enroll) =>
+                enroll === user?._id ? true : false
+              )}
+            />
+          ))
         )}
       </div>
     </div>

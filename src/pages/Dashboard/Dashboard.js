@@ -33,15 +33,11 @@ const Dashboard = () => {
         ) : (
           <>
             <div className="row justify-content-center my-4">
-              {user?.status === 'student' ? (
+              {user?.status === 'student' && (
                 <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
                   <Link to="/enrolled-post">
                     <EnrolledStudent text="Enrolled Post" />
                   </Link>
-                </div>
-              ) : (
-                <div className="my-3 col-xl-3 col-lg-3 col-md-4 col-sm-6 col-12">
-                  <EnrolledStudent text="Enrolled Student" />
                 </div>
               )}
               {user?.status === 'tutor' && (

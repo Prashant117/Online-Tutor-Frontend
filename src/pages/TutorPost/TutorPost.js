@@ -7,6 +7,7 @@ import AddCircleIcon from '@material-ui/icons/AddCircle';
 import AddTutorPost from '../../components/AddTutorPost/AddTutorPost';
 import './TutorPost.css';
 import { tutorViewProfile } from '../../actions/profile';
+import axios from 'axios';
 
 const TutorPost = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const TutorPost = () => {
     dispatch(tutorViewProfile(user?._id));
   }, [dispatch, user]);
   const { specificTutorPosts, loading } = useSelector((state) => state.post);
+
   return (
     <div className="container my-4">
       <div className="text-center">
@@ -28,8 +30,8 @@ const TutorPost = () => {
       <div className="row justify-content-center">
         {loading ? (
           <Spinner />
-        ) : specificTutorPosts?.length > 0 ? (
-          specificTutorPosts?.map((post) => (
+        ) : specificTutorPosts?.data?.length > 0 ? (
+          specificTutorPosts?.data?.map((post) => (
             <PostCard
               key={post?._id}
               tutorName={post.tutorName}
@@ -42,6 +44,7 @@ const TutorPost = () => {
               payment={post.payment}
               note={post.note}
               date={post.date}
+              enrolled_student={post.enrolled_student}
             />
           ))
         ) : (

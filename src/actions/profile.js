@@ -20,7 +20,10 @@ export const visitTutorProfile = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(`${BASE_URL}/profile/tutor/${id}`, config);
+    const res = await axios.get(
+      `${BASE_URL}/profile/visitor/tutor/${id}`,
+      config
+    );
     console.log(res);
     if (res.data.statusCode === 200) {
       dispatch({
@@ -80,7 +83,7 @@ export const studentViewProfile = (id) => async (dispatch) => {
     },
   };
   try {
-    const res = await axios.get(`${BASE_URL}/profile/student/${id}`, config);
+    const res = await axios.get(`${BASE_URL}/enroll/student/${id}`, config);
     console.log(res);
     if (res.data.statusCode === 200) {
       dispatch({

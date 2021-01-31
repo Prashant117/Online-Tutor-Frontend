@@ -3,6 +3,7 @@ import {
   STUDENT_VIEW_PROFILE,
   PROFILE_STATUS_CODE,
   VISIT_TUTOR_PROFILE,
+  VISIT_STUDENT_PROFILE,
 } from '../actions/types';
 
 const initialState = {
@@ -10,6 +11,7 @@ const initialState = {
   studentViewProfile: null,
   profileStatusCode: null,
   visitTutorProfile: null,
+  visitStudentProfile: null,
   loading: true,
 };
 
@@ -28,6 +30,12 @@ export const profile = (state = initialState, action) => {
         ...state,
         loading: false,
         visitTutorProfile: payload,
+      };
+    case VISIT_STUDENT_PROFILE:
+      return {
+        ...state,
+        loading: false,
+        visitStudentProfile: payload,
       };
     case STUDENT_VIEW_PROFILE:
       return {

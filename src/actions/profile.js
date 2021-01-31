@@ -3,6 +3,7 @@ import {
   STUDENT_VIEW_PROFILE,
   PROFILE_STATUS_CODE,
   VISIT_TUTOR_PROFILE,
+  VISIT_STUDENT_PROFILE,
 } from './types';
 import { setAlert } from './alert';
 import axios from 'axios';
@@ -10,7 +11,7 @@ import Cookies from 'js-cookie';
 
 const BASE_URL = 'http://localhost:5000/api';
 
-//Visit Tutor
+//Visit Tutor Profile
 
 export const visitTutorProfile = (id) => async (dispatch) => {
   const token = Cookies.get('Token');
@@ -28,6 +29,35 @@ export const visitTutorProfile = (id) => async (dispatch) => {
     if (res.data.statusCode === 200) {
       dispatch({
         type: VISIT_TUTOR_PROFILE,
+        payload: res.data.data,
+      });
+    }
+  } catch (error) {
+    const errors = error?.response?.data?.message;
+    if (errors) {
+      dispatch(setAlert(errors, 'danger'));
+    }
+  }
+};
+
+//Visit Student Profile
+
+export const visitStudentProfile = (id) => async (dispatch) => {
+  const token = Cookies.get('Token');
+  const config = {
+    headers: {
+      token: token,
+    },
+  };
+  try {
+    const res = await axios.get(
+      `${BASE_URL}/profile/visitor/student/${id}`,
+      config
+    );
+    console.log(res);
+    if (res.data.statusCode === 200) {
+      dispatch({
+        type: VISIT_STUDENT_PROFILE,
         payload: res.data.data,
       });
     }

@@ -15,6 +15,7 @@ import LiveClassHome from '../pages/LiveClass/Home';
 import LiveClass from '../pages/LiveClass/Video';
 import TutorPost from '../pages/TutorPost/TutorPost';
 import VisitTutorProfile from '../pages/VisitTutorProfile/TutorViewProfile';
+import VisitStudentProfile from '../pages/VisitStudentProfile/StudentViewProfile';
 import EnrolledPost from '../pages/EnrolledPost/EnrolledPost';
 
 const Routes = () => {
@@ -72,6 +73,9 @@ const Routes = () => {
           </Route>
           <Route exact path="/tutor-profile/:id">
             <VisitTutorProfile />
+          </Route>
+          <Route exact path="/student-profile/:id">
+            <VisitStudentProfile />
           </Route>
           <Route path="*">
             <NotFound />

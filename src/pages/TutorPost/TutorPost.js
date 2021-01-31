@@ -34,10 +34,10 @@ const TutorPost = () => {
           specificTutorPosts?.data?.map((post) => (
             <PostCard
               key={post?._id}
-              tutorName={post.tutorName}
+              tutorName={`${user?.firstName} ${user?.lastName}`}
               tutorId={post.tutorId}
-              image={post.image}
-              qualification={post.qualification}
+              image={user?.profile?.image}
+              qualification={user?.profile}
               subjectName={post.subjectName}
               time={post.time}
               days={post.days}

@@ -35,6 +35,23 @@ const PostCard = ({
     dispatch(studentEnroll(tutorId, user?._id, postId));
     window.location.reload();
   };
+
+  console.log(qualification);
+
+  let qualificationStatus;
+
+  if (qualification?.master) {
+    qualificationStatus = qualification?.master?.degree;
+  } else if (qualification?.graduation) {
+    qualificationStatus = qualification?.graduation?.degree;
+  } else if (qualification?.hsc) {
+    qualificationStatus = qualification?.hsc?.examination;
+  } else if (qualification?.ssc) {
+    qualificationStatus = qualification?.ssc?.examination;
+  } else {
+    qualification = 'N/A';
+  }
+
   return (
     <div className="postCard">
       <div className="postCard__image-wrapper">
@@ -74,7 +91,7 @@ const PostCard = ({
         </p>
         <p className="margin-bottom-0 d-flex justify-content-between">
           <span className="bold">Qualification:</span>
-          <span>{qualification}</span>
+          <span>{qualificationStatus}</span>
         </p>
         <p className="my-3">{note}</p>
         <p className="font-italic">

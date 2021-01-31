@@ -22,10 +22,10 @@ const Home = () => {
             <PostCard
               key={post?._id}
               postId={post?._id}
-              tutorName={post.tutorName}
+              tutorName={`${post.tutor_profile[0]?.firstName} ${post.tutor_profile[0]?.lastName}`}
               tutorId={post.tutorId}
-              image={post.image}
-              qualification={post.qualification}
+              image={post?.tutor_profile[0]?.profile?.image}
+              qualification={post?.tutor_profile[0]?.profile}
               subjectName={post.subjectName}
               time={post.time}
               days={post.days}

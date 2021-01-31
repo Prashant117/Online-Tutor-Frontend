@@ -9,26 +9,9 @@ const AddTutorPost = ({ show, handleClose, handleShow }) => {
   const { user } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  let qualification;
-
-  if (user?.profile?.master) {
-    qualification = user?.profile?.master?.degree;
-  } else if (user?.profile?.graduation) {
-    qualification = user?.profile?.graduation?.degree;
-  } else if (user?.profile?.hsc) {
-    qualification = user?.profile?.hsc?.examination;
-  } else if (user?.profile?.ssc) {
-    qualification = user?.profile?.ssc?.examination;
-  } else {
-    qualification = 'N/A';
-  }
 
   const onSubmit = (data) => {
     data.tutorId = user?._id;
-    const name = user?.firstName + user?.lastName;
-    data.tutorName = name;
-    data.image = user?.profile?.image;
-    data.qualification = qualification;
     console.log(data);
     dispatch(tutorPost(data));
     handleClose();

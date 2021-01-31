@@ -8,9 +8,6 @@ const BASE_URL = 'http://localhost:5000/api';
 // TUTOR POST
 export const tutorPost = ({
   tutorId,
-  tutorName,
-  image,
-  qualification,
   subjectName,
   time,
   payment,
@@ -26,9 +23,6 @@ export const tutorPost = ({
   };
   const body = JSON.stringify({
     tutorId,
-    tutorName,
-    image,
-    qualification,
     subjectName,
     time,
     payment: parseInt(payment),

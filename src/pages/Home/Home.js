@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getEnrolledPostByStudentId } from '../../actions/enroll';
 import { getAllTutorPosts } from '../../actions/tutorPost';
 import PostCard from '../../components/PostCard/PostCard';
 import Spinner from '../../components/Spinner/Spinner';
